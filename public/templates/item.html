@@ -1,0 +1,56 @@
+<div class="page-header">
+	<h1>View Voter</h1>
+</div>
+<div class="well well-lg">
+	<strong>Question</strong>
+	<br>{{voter.question}}
+</div>
+<div ng-hide="voter.userVoted">
+	<p class="lead">Please select one of the following options.</p>
+	<form role="form" ng-submit="voting()">
+		<div ng-repeat="choice in voter.choices" class="radio">
+			<label>
+				<input type="radio" name="choice" ng-model="voter.userVote" value="{{choice._id}}"></input>
+				{{choice.text}}
+			</label>
+		</div>
+		<p><hr></p>
+		<div class="row">
+			<div class="col-xs-6">
+				<a href="#/voter" class="btn btn-default" role="button">
+					<span class="glyphicon glyphicon-arrow-left">Back to Voter</span>
+				</a>
+			</div>
+			<div class="col-xs-6">
+				<button class="btn btn-primary pull-right" type="submit">
+					Vote &raquo;
+				</button>
+			</div>
+		</div>
+	</form>
+</div>
+<div ng-show="voter.userVoted">
+	<table class="result-table">
+		<tbody>
+			<tr ng-repeat="choice in voter.choices">
+				<td>{{choice.text}}</td>
+				<td>
+					<table style="width:{{choice.votes.length/voter.totalVotes*100}}%">
+						<tr><td>{{choice.votes.length}}</td></tr>
+					</table>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<p>
+		<em>{{voter.totalVotes}} votes counted so far.
+			<span ng-show="voter.userChoice">Your voted for <strong>{{voter.userChoice.text}}</strong></span>
+		</em>
+	</p>
+	<p><hr></p>
+	<p><a href="#/voters" class="btn btn-default" role="button">
+		<span class="glyphicon glyphicon-arrow-left"></span>
+		&nbsp;Back to Voter List
+	</a></p>
+</div>
+<p>&nbsp;</p>

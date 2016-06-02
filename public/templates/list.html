@@ -1,0 +1,33 @@
+<div class="page-header">
+	<h1>Voter List</h1>
+</div>
+<div class="row">
+	<div class="col-xs-5">
+		<a href="#/new" class="btn btn-default">
+			<span class="glyphicon glyphicon-plus"></span>
+			New Voter
+		</a>
+	</div>
+	<div class="col-xs-7">
+		<input type="text" class="form-control" ng-model="query" placeholder="Search for a voter"></input>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">
+		<hr>
+	</div>
+</div>
+<div class="row" ng-switch on="voters.length">
+	<ul ng-switch-when="0">
+		<li>
+			<em>No voters in database. Would you like to 
+			<a href="#/new">create one</a>?
+		</li>
+	</ul>
+	<ul ng-switch-default>
+		<li ng-repeat="voter in voters|filter:query">
+			<a href="#/voters/{{voter.id}}">{{voter.question}}</a>
+		</li>
+	</ul>
+</div>
+<p>&nbsp;</p>
